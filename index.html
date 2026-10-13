@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fayadgamer13 Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        oneui: {
+                            bg: '#0a0d14',
+                            card: 'rgba(23, 28, 41, 0.7)',
+                            cardBorder: 'rgba(255, 255, 255, 0.08)',
+                            primary: '#3b82f6',
+                            accent: '#60a5fa',
+                            glow: 'rgba(59, 130, 246, 0.15)',
+                            surface: '#151b28',
+                            squircle: '#1c2436'
+                        }
+                    },
+                    borderRadius: {
+                        'squircle': '1.75rem',
+                        'squircle-sm': '1rem'
+                    },
+                    animation: {
+                        'glow-pulse': 'glowPulse 4s infinite alternate',
+                        'float': 'float 6s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        glowPulse: {
+                            '0%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.1)' },
+                            '100%': { boxShadow: '0 0 35px rgba(59, 130, 246, 0.35)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #080a10;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(20, 26, 38, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(25, 32, 48, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            background: rgba(32, 41, 62, 0.75);
+            border-color: rgba(96, 165, 250, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 25px rgba(59, 130, 246, 0.2);
+        }
+
+        .glass-input {
+            background: rgba(15, 20, 31, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        .glass-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080a10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 1.75rem;
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.3), rgba(168, 85, 247, 0.1));
+            padding: 1px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+    <button onclick="localStorage.clear(); alert('Storage cleared!');">
+  Clear Data
+</button>
+
+
+    <!-- Ambient Glow Elements -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-[120px] pointer-events-none -z-10 animate-glow-pulse"></div>
+    <div class="fixed bottom-10 right-1/4 w-96 h-96 bg-purple-600/15 rounded-full blur-[120px] pointer-events-none -z-10 animate-glow-pulse" style="animation-delay: 2s;"></div>
+
+    <!-- Main Content Container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+
+        <!-- HEADER SECTION (Profile & Bio) -->
+        <header class="mb-10">
+            <div class="glass-panel rounded-squircle p-6 md:p-8 relative overflow-hidden shadow-2xl">
+                <!-- Inner Gradient Accent Line -->
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative z-10">
+                    <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+                        <!-- Avatar Badge -->
+                        <div class="relative group">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-squircle blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
+                            <div class="relative w-28 h-28 md:w-32 md:h-32 rounded-squircle bg-oneui-surface overflow-hidden flex items-center justify-center border border-white/10 shadow-inner">
+                                <img src="https://avatars.githubusercontent.com/u/211319626?v=4" alt="fayadgamer13 Avatar" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" onerror="this.onerror=null; this.src='https://placehold.co/200x200/1f2937/ffffff?text=FG13';">
+                            </div>
+                            <div class="absolute -bottom-1 -right-1 bg-blue-500 text-white p-1.5 rounded-full border-2 border-slate-900 shadow-md" title="Verified Creator">
+                                <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+
+                        <!-- User Info & Bio -->
+                        <div class="text-center md:text-left flex-1">
+                            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-1">
+                                Fayadgamer13
+                            </h1>
+                            <p class="text-slate-400 text-sm md:text-base font-medium max-w-2xl mb-4 leading-relaxed">
+                                Gamer, Developer & Web Developer.
+                            </p>
+
+                            <!-- Quick Social Badges -->
+                            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
+                                <a href="https://github.com/fayadgamer13" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/10 text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2">
+                                    <i data-lucide="code" class="w-4 h-4"></i> GitHub 
+                                </a>
+                                <a href="https://itch.io/profile/fayadgamer13" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/10 text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2">
+                                    <i data-lucide="gamepad-2" class="w-4 h-4"></i> Itch.io
+                                </a>
+                                <a href="https://scratch.mit.edu/users/doodlegames13/" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/10 text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2">
+                                    <i data-lucide="code" class="w-4 h-4"></i> Scratch
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Site Action Button -->
+                    <div>
+                        <button id="addSiteBtn" class="px-5 py-3 rounded-squircle-sm bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-lg shadow-blue-500/30 flex items-center gap-2 transition">
+                            <i data-lucide="plus" class="w-4 h-4"></i> Add Website
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SEARCH AND FILTER BAR -->
+        <section class="mb-8 space-y-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <!-- Search Box -->
+                <div class="relative w-full md:w-96">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
+                    <input type="text" id="searchInput" placeholder="Search projects or tags..." class="w-full pl-11 pr-4 py-3 rounded-squircle-sm glass-input text-sm text-white placeholder-slate-400 focus:outline-none transition">
+                </div>
+
+                <!-- Category Chips -->
+                <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none" id="categoryChips">
+                    <!-- Dynamic chips injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- WEBSITES GRID -->
+        <main>
+            <div id="cardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cards will be populated dynamically -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden text-center py-16 glass-panel rounded-squircle my-6">
+                <i data-lucide="folder-search" class="w-12 h-12 text-slate-500 mx-auto mb-3"></i>
+                <h3 class="text-lg font-semibold text-slate-200">No websites found</h3>
+                <p class="text-slate-400 text-sm mt-1">Try adjusting your search query or filter category.</p>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="mt-16 border-t border-white/5 bg-slate-950/60 backdrop-blur-md py-6 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© <span id="year"></span> fayadgamer13.github.io • All rights reserved.</p>
+            <p class="flex items-center gap-1">
+                Built with One UI Design Principles & Dynamic Web Engine
+            </p>
+        </div>
+    </footer>
+
+    <!-- MODAL: QUICK VIEW / PREVIEW -->
+    <div id="previewModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4 transition-opacity">
+        <div class="glass-panel w-full max-w-2xl rounded-squircle overflow-hidden shadow-2xl transform transition-all border border-white/10">
+            <div class="relative h-60 bg-slate-950">
+                <img id="modalImg" src="" alt="Preview" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                <button id="closeModalBtn" class="absolute top-4 right-4 p-2 rounded-full bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+                <span id="modalBadge" class="absolute bottom-4 left-6 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30"></span>
+            </div>
+            <div class="p-6">
+                <h3 id="modalTitle" class="text-2xl font-bold text-white mb-2"></h3>
+                <p id="modalDesc" class="text-slate-300 text-sm leading-relaxed mb-6"></p>
+                
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+                    <button id="closeModalFooter" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium transition">
+                        Close
+                    </button>
+                    <a id="modalLaunchBtn" href="#" target="_blank" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold shadow-lg shadow-blue-500/30 flex items-center gap-2 transition">
+                        Launch Site <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: ADD CUSTOM SITE -->
+    <div id="addSiteModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-md rounded-squircle p-6 shadow-2xl border border-white/10">
+            <div class="flex items-center justify-between mb-5">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i data-lucide="plus-circle" class="w-5 h-5 text-blue-400"></i> Add New Website
+                </h3>
+                <button id="closeAddModalBtn" class="text-slate-400 hover:text-white transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <form id="addSiteForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Title</label>
+                    <input type="text" id="inputTitle" required placeholder="e.g. My Cool Project" class="w-full px-4 py-2.5 rounded-xl glass-input text-sm text-white placeholder-slate-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Category</label>
+                    <select id="inputCategory" class="w-full px-4 py-2.5 rounded-xl glass-input text-sm text-white focus:outline-none bg-slate-900">
+                        <option value="Games">Games</option>
+                        <option value="Portal">Portal</option>
+                        <option value="Apps">Apps</option>
+                        <option value="Utilities">Utilities</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">URL / Link</label>
+                    <input type="url" id="inputUrl" required placeholder="https://example.com" class="w-full px-4 py-2.5 rounded-xl glass-input text-sm text-white placeholder-slate-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Image URL (Optional)</label>
+                    <input type="url" id="inputImage" placeholder="https://images.unsplash.com/..." class="w-full px-4 py-2.5 rounded-xl glass-input text-sm text-white placeholder-slate-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Description</label>
+                    <textarea id="inputDesc" rows="3" required placeholder="Short description of your project..." class="w-full px-4 py-2.5 rounded-xl glass-input text-sm text-white placeholder-slate-500 focus:outline-none resize-none"></textarea>
+                </div>
+                <div class="pt-2 flex justify-end gap-3">
+                    <button type="button" id="cancelAddBtn" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700 transition">Cancel</button>
+                    <button type="submit" class="px-5 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-500 shadow-md shadow-blue-500/20 transition">Save Site</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Sample default data
+        const defaultSites = [
+            {
+                id: '1',
+                title: 'AirSky Hub Games',
+                category: 'Games',
+                desc: 'Play Unblocked Games!.',
+                url: 'https://fayadgamer13.github.io/AirSky.github.io',
+                image: 'airsky.png'
+            },
+            {
+                id: '2',
+                title: 'SandFiles',
+                category: 'Utilities',
+                desc: 'View your files at your Browser!.',
+                url: 'https://fayadgamer13.github.io/SandFiles.github.io',
+                image: 'sandfiles.png'
+            },
+            {
+                id: '3',
+                title: 'East HalalScan(Halal Finder)',
+                category: 'Utilities',
+                desc: 'Find an Halal Food.',
+                url: 'https://fayadgamer13.github.io/Halal_Finder.github.io/',
+                image: 'halalfinder.png'
+            },
+            {
+                id: '4',
+                title: 'RemindLater',
+                category: 'Utilites',
+                desc: 'Remind yourself when your reminder comes.',
+                url: 'https://fayadgamer13.github.io/RemindLater.github.io/',
+                image: 'remindlater.png'
+            },
+            {
+                id: '5',
+                title: 'NovaSurf',
+                category: 'Apps',
+                desc: 'A new clean browser designed and improved better. (Note: Clicking "Launch Site" would install NovaSurf for Android Only)',
+                url: 'https://github.com/fayadgamer13/NovaSurf/releases/download/1.4/app-latest-1.4.apk',
+                image: 'novasurf.png'
+            }
+        ];
+
+        // Global State
+        let sites = [];
+        let selectedCategory = 'All';
+        let searchQuery = '';
+
+        // DOM Elements
+        const cardsGrid = document.getElementById('cardsGrid');
+        const emptyState = document.getElementById('emptyState');
+        const searchInput = document.getElementById('searchInput');
+        const categoryChipsContainer = document.getElementById('categoryChips');
+        const previewModal = document.getElementById('previewModal');
+        const addSiteModal = document.getElementById('addSiteModal');
+
+        // Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+            loadSites();
+            renderCategories();
+            renderCards();
+
+            // Event Listeners
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase().trim();
+                renderCards();
+            });
+
+            // Modal Toggles
+            document.getElementById('addSiteBtn').addEventListener('click', () => toggleAddModal(true));
+            document.getElementById('closeAddModalBtn').addEventListener('click', () => toggleAddModal(false));
+            document.getElementById('cancelAddBtn').addEventListener('click', () => toggleAddModal(false));
+            document.getElementById('closeModalBtn').addEventListener('click', () => togglePreviewModal(false));
+            document.getElementById('closeModalFooter').addEventListener('click', () => togglePreviewModal(false));
+
+            // Form Submit
+            document.getElementById('addSiteForm').addEventListener('submit', handleAddSite);
+
+            // Lucide Init
+            lucide.createIcons();
+        });
+
+        // Load Sites from localStorage or fallback
+        function loadSites() {
+            const saved = localStorage.getItem('fg13_sites');
+            if (saved) {
+                try {
+                    sites = JSON.parse(saved);
+                } catch(e) {
+                    sites = defaultSites;
+                }
+            } else {
+                sites = defaultSites;
+                saveSites();
+            }
+        }
+
+        function saveSites() {
+            localStorage.setItem('fg13_sites', JSON.stringify(sites));
+        }
+
+        // Render Category Chips
+        function renderCategories() {
+            const categories = ['All', 'Games', 'Portal', 'Apps', 'Utilities'];
+            categoryChipsContainer.innerHTML = '';
+
+            categories.forEach(cat => {
+                const isActive = cat === selectedCategory;
+                const chip = document.createElement('button');
+                chip.className = `px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-300 ${
+                    isActive 
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' 
+                        : 'glass-panel text-slate-400 hover:text-white hover:bg-slate-800'
+                }`;
+                chip.textContent = cat;
+                chip.addEventListener('click', () => {
+                    selectedCategory = cat;
+                    renderCategories();
+                    renderCards();
+                });
+                categoryChipsContainer.appendChild(chip);
+            });
+        }
+
+        // Render Card Items
+        function renderCards() {
+            cardsGrid.innerHTML = '';
+
+            const filtered = sites.filter(site => {
+                const matchesCategory = selectedCategory === 'All' || site.category === selectedCategory;
+                const matchesSearch = site.title.toLowerCase().includes(searchQuery) || 
+                                      site.desc.toLowerCase().includes(searchQuery) ||
+                                      site.category.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            filtered.forEach(site => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-squircle overflow-hidden flex flex-col justify-between group relative';
+
+                const fallbackImg = `https://placehold.co/600x400/1e293b/ffffff?text=${encodeURIComponent(site.title)}`;
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Thumbnail Box -->
+                        <div class="relative h-44 overflow-hidden bg-slate-900">
+                            <img src="${site.image || fallbackImg}" alt="${site.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='${fallbackImg}';">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            
+                            <!-- Category Badge -->
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-bold bg-slate-900/80 text-blue-400 border border-white/10 backdrop-blur-md">
+                                ${site.category}
+                            </span>
+
+                            <!-- Preview Icon Button -->
+                            <button onclick="openPreview('${site.id}')" class="absolute top-3 right-3 p-2 rounded-full bg-slate-900/70 text-slate-300 hover:text-white hover:bg-blue-600 transition shadow-lg opacity-0 group-hover:opacity-100" title="Quick View">
+                                <i data-lucide="eye" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+
+                        <!-- Content Box -->
+                        <div class="p-5">
+                            <h2 class="text-lg font-bold text-white mb-2 group-hover:text-blue-400 transition-colors flex items-center justify-between">
+                                ${site.title}
+                            </h2>
+                            <p class="text-slate-400 text-xs leading-relaxed line-clamp-2">
+                                ${site.desc}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Actions -->
+                    <div class="px-5 pb-5 pt-2 flex items-center gap-2">
+                        <a href="${site.url}" target="_blank" class="flex-1 py-2.5 px-4 rounded-xl bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-semibold text-center transition duration-300 flex items-center justify-center gap-2 shadow-sm">
+                            Launch Site <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <button onclick="deleteSite('${site.id}')" class="p-2.5 rounded-xl bg-slate-800/50 hover:bg-red-500/20 text-slate-400 hover:text-red-400 border border-white/5 transition" title="Delete Card">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                `;
+
+                cardsGrid.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        // Quick View Modal Logic
+        window.openPreview = function(id) {
+            const site = sites.find(s => s.id === id);
+            if (!site) return;
+
+            document.getElementById('modalImg').src = site.image || `https://placehold.co/600x400/1e293b/ffffff?text=${encodeURIComponent(site.title)}`;
+            document.getElementById('modalTitle').textContent = site.title;
+            document.getElementById('modalDesc').textContent = site.desc;
+            document.getElementById('modalBadge').textContent = site.category;
+            document.getElementById('modalLaunchBtn').href = site.url;
+
+            togglePreviewModal(true);
+        }
+
+        function togglePreviewModal(show) {
+            if (show) {
+                previewModal.classList.remove('hidden');
+                previewModal.classList.add('flex');
+            } else {
+                previewModal.classList.add('hidden');
+                previewModal.classList.remove('flex');
+            }
+        }
+
+        // Add Modal Logic
+        function toggleAddModal(show) {
+            if (show) {
+                addSiteModal.classList.remove('hidden');
+                addSiteModal.classList.add('flex');
+            } else {
+                addSiteModal.classList.add('hidden');
+                addSiteModal.classList.remove('flex');
+                document.getElementById('addSiteForm').reset();
+            }
+        }
+
+        // Handle Site Form Submit
+        function handleAddSite(e) {
+            e.preventDefault();
+            const newSite = {
+                id: Date.now().toString(),
+                title: document.getElementById('inputTitle').value.trim(),
+                category: document.getElementById('inputCategory').value,
+                url: document.getElementById('inputUrl').value.trim(),
+                image: document.getElementById('inputImage').value.trim() || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80',
+                desc: document.getElementById('inputDesc').value.trim()
+            };
+
+            sites.unshift(newSite);
+            saveSites();
+            renderCards();
+            toggleAddModal(false);
+        }
+
+        // Delete Site Logic
+        window.deleteSite = function(id) {
+            sites = sites.filter(s => s.id !== id);
+            saveSites();
+            renderCards();
+        }
+    </script>
+</body>
+</html>
